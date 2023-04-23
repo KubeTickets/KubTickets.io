@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+  <meta content="ie=edge" http-equiv="X-UA-Compatible"/>
+  <title>Payment</title>
+</head>
+
+<body style="background-image: linear-gradient(gray, gold); background-repeat: no-repeat ; height:100%">
+
+<div style="margin-top: 50px; text-align: center; height:100vh">
+  <h1 style="color:white; font-weight: bold; font-size: 30px">Payment Confirmation</h1>
+  <h4 style="color:white; font-weight: bold">Click the button to pay:</h4>
+  <button onclick="makeRequest()"
+          style="width: 200px ; color: black ; background-color: white; border-radius: 20px; border: white ;padding:3px">
+    Pay
+  </button>
+  <div id="response"></div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+
+<script>
+
+  function makeRequest() {
+    let params = new URLSearchParams(window.location.search);
+    let idd = params.get('idd');
+    let count = params.get('count');
+    let token = params.get('token');
+
+
+    window.location.replace(`https://kubeticket.org/payments/checkout/${idd}/${count}/?token=${token}`);
+
+  }
+</script>
+</body>
+</html>
