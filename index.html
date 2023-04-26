@@ -12,16 +12,36 @@
 <div style="margin-top: 50px; text-align: center; height:100vh">
   <h1 style="color:white; font-weight: bold; font-size: 30px">Payment Confirmation</h1>
   <h4 style="color:white; font-weight: bold">Click the button to pay:</h4>
-  <button onclick="makeRequest()"
-          style="width: 200px ; color: black ; background-color: white; border-radius: 20px; border: white ;padding:3px">
-    Pay
-  </button>
+
+
+    <form id="demo-form" onsubmit="onSubmit">
+        <button class="g-recaptcha"
+        data-sitekey="6LcU47olAAAAAOXXFJ5wxlzbhXcqJ118cnxBfDae"
+        data-callback='onSubmit'
+        data-action='submit'
+
+        style="width: 200px ; color: black ; background-color: white; border-radius: 20px; border: white ;padding:3px"
+
+        > Pay</button>
+    </form>
+
   <div id="response"></div>
 </div>
 
 <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
 
+ <script src="https://www.google.com/recaptcha/api.js"></script>
+
+
+
 <script>
+let val=true
+
+
+function onSubmit(token) {
+     document.getElementById("demo-form").submit();
+     makeRequest()
+   }
 
   function makeRequest() {
     let params = new URLSearchParams(window.location.search);
@@ -30,7 +50,8 @@
     let token = params.get('token');
 
 
-    window.location.replace(`https://kubeticket.org/payments/checkout/${idd}/${count}/?token=${token}`);
+      window.location.replace(`https://kubeticket.org/payments/checkout/${idd}/${count}/?token=${token}`);
+
 
   }
 </script>
