@@ -1,59 +1,62 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8"/>
-  <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
-  <meta content="ie=edge" http-equiv="X-UA-Compatible"/>
-  <title>Payment</title>
+    <meta charset="UTF-8"/>
+    <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+    <meta content="ie=edge" http-equiv="X-UA-Compatible"/>
+    <title>Payment</title>
 </head>
 
 <body style="background-color: white;font-family:Montserrat,Monument,sans-serif ; background-repeat: no-repeat ; height:100%;overflow: hidden">
 
 <div style="margin-top: 50px; text-align: center; height:100vh">
-  <h1 style="color:black; font-weight: bold; font-size: 30px">Payment Confirmation</h1>
-  <h4 style="color:black; font-weight: bold">Click the button to pay:</h4>
+    <h1 style="color:black; font-weight: bold; font-size: 30px">Payment Confirmation</h1>
+    <h4 style="color:black; font-weight: bold">Click the button to pay:</h4>
 
 
     <form id="demo-form" onsubmit="onSubmit">
         <button class="g-recaptcha"
-        data-sitekey="6LcU47olAAAAAOXXFJ5wxlzbhXcqJ118cnxBfDae"
-        data-callback='onSubmit'
-        data-action='submit'
+                data-action='submit'
+                data-callback='onSubmit'
+                data-sitekey="6LcU47olAAAAAOXXFJ5wxlzbhXcqJ118cnxBfDae"
 
-        style="width: 200px ; color: black ; background-color: goldenrod; border-radius: 20px; border: white ;padding:3px"
+                style="cursor:pointer;width: 200px ; color: black ; background-color: goldenrod; border-radius: 20px; border: white ;padding:3px"
 
-        > Pay</button>
+        > Pay | قم بالدفع
+        </button>
     </form>
 
-  <div id="response"></div>
+    <div id="response"></div>
 </div>
 
 <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
 
- <script src="https://www.google.com/recaptcha/api.js"></script>
-
+<script src="https://www.google.com/recaptcha/api.js"></script>
 
 
 <script>
-let val=true
+    let val = true
 
 
-function onSubmit(token) {
-     document.getElementById("demo-form").submit();
-     makeRequest()
-   }
+    function onSubmit() {
+        document.getElementById("demo-form").submit();
+        makeRequest()
+    }
 
-  function makeRequest() {
-    let params = new URLSearchParams(window.location.search);
-    let idd = params.get('idd');
-    let count = params.get('count');
-    let token = params.get('token');
+    function makeRequest() {
+        let params = new URLSearchParams(window.location.search);
+        let idd = params.get('idd');
+        let count = params.get('count');
+        let token = params.get('token');
+
+        if((idd===null || idd==='') ||(count===null || count==='') ||(token===null || token==='')){
+            window.location.replace("https://kubeticket.com/all/all")
+        }
+
+        window.location.replace(`https://kubeticket.org/payments/checkout/${idd}/${count}/?token=${token}`);
 
 
-      window.location.replace(`https://kubeticket.org/payments/checkout/${idd}/${count}/?token=${token}`);
-
-
-  }
+    }
 </script>
 </body>
 </html>
